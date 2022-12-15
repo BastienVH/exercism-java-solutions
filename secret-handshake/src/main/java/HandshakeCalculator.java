@@ -15,6 +15,7 @@ class HandshakeCalculator {
                 resultList.add(Signal.values()[i]);
             }
             number = number >> 1;
+            if (number == 0) break;
         }
         if ((number & 1) == 1) Collections.reverse(resultList);
         return resultList;
