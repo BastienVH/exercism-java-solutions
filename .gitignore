@@ -1,3 +1,4 @@
 .exercism/
 .gradle/
+bin/
 build
