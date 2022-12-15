@@ -9,46 +9,14 @@ class HandshakeCalculator {
 
     List<Signal> calculateHandshake(int number) {
         List<Signal> resultList = new ArrayList<>();
-        List<Integer> binNumber = decToBinary(number);
-        if (binNumber.size() > 5) {
-            binNumber = truncateList(binNumber);
-        }
 
-        // check if the order should be reversed
-        boolean shouldReverse = false;
-        if ((binNumber.size() == 5) && binNumber.get(0) == 1) {
-            shouldReverse = true;
-            // drop first element (reverser) from list
-            binNumber.remove(0);
-        }
-
-        int signalIterator = 0;
-        // check each bit if it is 1, if so, add correct signal to resultList
-        for (int i = binNumber.size() - 1; i >= 0; i--) {
-            if (binNumber.get(i) == 1) {
-                resultList.add(Signal.values()[signalIterator]);
+        for (int i = 0; i < 4; i++) {
+            if ((number & 1) == 1) {
+                resultList.add(Signal.values()[i]);
             }
-            signalIterator++;
+            number = number >> 1;
         }
-        if (shouldReverse == true)
-            Collections.reverse(resultList);
+        if ((number & 1) == 1) Collections.reverse(resultList);
         return resultList;
-    }
-
-    List<Integer> decToBinary(int number) {
-        List <Integer> binNumberAsList = new ArrayList<Integer>();
-        while (number > 0) {
-            binNumberAsList.add(number % 2);
-            number = number / 2;
-        }
-        Collections.reverse(binNumberAsList);
-        return binNumberAsList;
-    }
-
-    List<Integer> truncateList(List<Integer> longList) {
-        while (longList.size() > 5) {
-            longList.remove(0);            
-        }
-        return longList;
     }
 }
