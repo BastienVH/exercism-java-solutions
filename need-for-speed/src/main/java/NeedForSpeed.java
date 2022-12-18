@@ -40,6 +40,6 @@ class RaceTrack {
     }
 
     public boolean tryFinishTrack(NeedForSpeed car) {
-        return (car.getMaxDistance() >= distance);
+        return car.getMaxDistance() >= distance;
     }
 }
