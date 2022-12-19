@@ -3,11 +3,25 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 class DnDCharacter {
 
+    private final Random random;
+    private final int strength, dexterity, constitution, intelligence, wisdom, charisma;
+
+    public DnDCharacter() {
+        random = new Random();
+        strength = ability();
+        dexterity = ability();
+        constitution = ability();
+        intelligence = ability();
+        wisdom = ability();
+        charisma = ability();
+    }
+
     int ability() {
-        return getDiceThrows();
+        return random.ints(4, 1, 7).sorted().limit(3).sum();
     }
     
     int modifier(int input) {
@@ -15,43 +29,43 @@ class DnDCharacter {
     }
     
     int getStrength() {
-        return getDiceThrows();
+        return strength;
     }
     
     int getDexterity() {
-        return getDiceThrows();
+        return dexterity;
     }
     
     int getConstitution() {
-        return getDiceThrows();
+        return constitution;
     }
     
     int getIntelligence() {
-        return getDiceThrows();
+        return intelligence;
     }
     
     int getWisdom() {
-        return getDiceThrows();
+        return wisdom;
     }
     
     int getCharisma() {
-        return getDiceThrows();
+        return charisma;
     }
 
     int getHitpoints() {
         return 10 + modifier(getConstitution());
     }
+    
+    // private static int throwDice() {
+    //     return (int) Math.random() * 6 + 1;
+    // }
 
-    private static int throwDice() {
-        return (int) Math.random() * 6 + 1;
-    }
-
-    private static int getDiceThrows() {
-        int[] diceThrows = new int[4];
-        for (int i = 0; i < 4; i++) {
-            diceThrows[i] = throwDice();
-        }
-        return Arrays.stream(diceThrows).sorted().limit(3).sum();
-    }
+    // private static int getDiceThrows() {
+    //     int[] diceThrows = new int[4];
+    //     for (int i = 0; i < 4; i++) {
+    //         diceThrows[i] = throwDice();
+    //     }
+    //     return Arrays.stream(diceThrows).sorted().limit(3).sum();
+    // }
 
 }
